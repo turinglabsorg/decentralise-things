@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Decentralize things</title>
+  <script src="https://unpkg.com/lodash@4.17.20"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-image: url(https://i.pinimg.com/originals/7e/46/a6/7e46a6df67a5a34a4fdaf57487c956fc.gif);
+      background-size: cover;
+      background-position: top;
+      background-repeat: no-repeat;
+    }
+
+    body,
+    input,
+    button {
+      font-family: 'VT323', monospace;
+      font-size: 40px;
+      color: #fff;
+    }
+
+    button:hover {
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body style="text-align:center">
+  <h1 style="font-size:120px">DECENTRALIZE<br>THINGS</h1>
+  <div style="background:rgba(0,0,0,0.2); padding-top:30px">
+    <p>Paste a line of code, include a single<br>javascript file and enter the Web3.</p>
+    <br>--<br><br>
+    <button style="color:#000" id="eth-button" network="rinkeby" infura="57d9ea9ca92a4449933c2b7d7145187d">CONNECT WALLET</button><br>
+    <div style="font-size:22px; width:80%; display:inline-block;margin-top:40px;margin-bottom: 40px;" id="eth-signature"></div>
+  </div>
+  <script src="./eth.min.js"></script>
+</body>
+
+</html>

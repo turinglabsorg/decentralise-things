@@ -1,0 +1,34 @@
+{
+  "name": "eth-login",
+  "version": "1.0.0",
+  "description": "Simple ready to use web3 login button.",
+  "scripts": {
+    "build": "npx webpack --config webpack.config.js",
+    "dev": "webpack serve --open",
+    "serve": "serve dist/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/turinglabsorg/eth-login.git"
+  },
+  "keywords": [],
+  "author": "turinglabsorg",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/turinglabsorg/eth-login/issues"
+  },
+  "homepage": "https://github.com/turinglabsorg/eth-login#readme",
+  "devDependencies": {
+    "webpack": "^5.58.2",
+    "webpack-cli": "^4.9.0",
+    "webpack-dev-server": "^4.3.1"
+  },
+  "dependencies": {
+    "@walletconnect/web3-provider": "^1.6.6",
+    "lodash": "^4.17.21",
+    "node-polyfill-webpack-plugin": "^1.1.4",
+    "random-words": "^1.1.2",
+    "web3": "^1.6.0",
+    "web3modal": "^1.9.4"
+  }
+}
