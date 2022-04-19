@@ -1,14 +1,9 @@
 import _ from 'lodash';
 import Web3 from "web3";
-import Web3Modal, { isMobile } from "web3modal";
-import WalletConnectProvider from "@walletconnect/web3-provider";
 // Used for demo
-const randomWords = require('random-words');
-
 let web3
 let account
 let balance
-let signature
 let isSigning = false
 
 const networks = {
@@ -35,24 +30,7 @@ async function connect() {
     }
     console.log('Connecting using network: ' + network)
     // Checking if infura exists for WalletConnect
-    let providerOptions = {}
-    if (el.getAttribute('infura') !== undefined) {
-        providerOptions = {
-            walletconnect: {
-                package: WalletConnectProvider,
-                options: {
-                    infuraId: el.getAttribute('infura'),
-                },
-            },
-        }
-    }
-    // Instantiating Web3Modal
-    const web3Modal = new Web3Modal({
-        cacheProvider: true,
-        providerOptions: providerOptions,
-    });
-    const provider = await web3Modal.connect();
-    web3 = await new Web3(provider);
+    web3 = await new Web3(window.ethereum);
     // Checking if networkId matches
     const netId = await web3.eth.net.getId();
     if (netId !== networks[network]) {
@@ -79,7 +57,7 @@ async function sign() {
         isSigning = true
         try {
             document.getElementById('eth-signature').innerText = "SIGNING, PLEASE WAIT..."
-            const words = randomWords({exactly:5, wordsPerString:2, formatter: (word)=> word.toUpperCase()}).join(' ')
+            const words = "I WANT TO BE A NERD!"
             const signature = await web3.eth.personal.sign(words, account);
             document.getElementById('eth-signature').innerText = signature
             document.getElementById('eth-button').innerText = "SIGN MESSAGE"
