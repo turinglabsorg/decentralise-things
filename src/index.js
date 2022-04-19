@@ -32,23 +32,21 @@ async function connect() {
     // Checking if infura exists for WalletConnect
     web3 = await new Web3(window.ethereum);
     // Checking if networkId matches
-    const netId = await web3.eth.net.getId();
-    if (netId !== networks[network]) {
-        console.log('Found different network: ' + netId + ',needed ' + networks[network])
-        await switchNetwork(network);
-    } else {
-        const accounts = await web3.eth.getAccounts();
-        if (accounts.length > 0) {
-            balance = await web3.eth.getBalance(accounts[0]);
-            account = accounts[0];
-            balance = parseFloat(
-                web3.utils.fromWei(balance, "ether")
-            ).toFixed(10);
-            console.log('Found account: ' + account)
-            console.log('Account balance: ' + balance)
-            document.getElementById('eth-button').innerText = "SIGN MESSAGE"
-            el.addEventListener("click", sign, false);
-        }
+    const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+        params: [],
+      });
+    console.log(accounts)
+    if (accounts.length > 0) {
+        balance = await web3.eth.getBalance(accounts[0]);
+        account = accounts[0];
+        balance = parseFloat(
+            web3.utils.fromWei(balance, "ether")
+        ).toFixed(10);
+        console.log('Found account: ' + account)
+        console.log('Account balance: ' + balance)
+        document.getElementById('eth-button').innerText = "SIGN MESSAGE"
+        el.addEventListener("click", sign, false);
     }
 }
 
@@ -68,23 +66,4 @@ async function sign() {
             alert(e.message)
         }
     }
-}
-
-async function switchNetwork() {
-    await window.ethereum.request({
-        method: "wallet_addEthereumChain",
-        params: [
-            {
-                chainId: "0x89",
-                chainName: "Polygon",
-                rpcUrls: ["https://rpc-mainnet.matic.network"],
-                nativeCurrency: {
-                    name: "MATIC",
-                    symbol: "MATIC",
-                    decimals: 18,
-                },
-                blockExplorerUrls: ["https://polygonscan.com/"],
-            },
-        ],
-    });
 }
