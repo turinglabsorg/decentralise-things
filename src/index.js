@@ -70,7 +70,7 @@ async function sign() {
     if (!isSigning) {
         isSigning = true
         try {
-            document.getElementById('eth-signature').innerText = "SIGNING, PLEASE WAIT..."
+            document.getElementById('eth-signature').innerText = "SIGNING..."
             // Ask signature to wallet
             const signature = await web3.eth.personal.sign(quote, account)
             document.getElementById('eth-signature').innerText = signature
