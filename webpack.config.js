@@ -7,12 +7,12 @@ module.exports = {
   performance: { hints: false },
   output: {
     filename: 'eth.min.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'docs'),
   },
   plugins: [
     new NodePolyfillPlugin()
   ],
   devServer: {
-    static: './dist'
+    static: './docs'
   },
 };
