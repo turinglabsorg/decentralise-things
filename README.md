@@ -1,4 +1,4 @@
-# Decentralize Things
+# Decentralise Things
 
 Simple ready to use Ethereum login with signature.
 
