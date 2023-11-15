@@ -94,7 +94,7 @@ async function signTyped() {
         try {
             document.getElementById('eth-signature').innerText = "SIGNING..."
             const domain = {
-                name: 'Ether Mail',
+                name: 'Decentralise this!',
                 version: '1',
                 chainId: 1,
                 verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC'
@@ -102,28 +102,32 @@ async function signTyped() {
 
             // The named list of all type definitions
             const types = {
-                Person: [
+                Quote: [
+                    { name: 'from', type: 'Character' },
+                    { name: 'to', type: 'Character' },
+                    { name: 'contents', type: 'string' }
+                ],
+                Character: [
                     { name: 'name', type: 'string' },
                     { name: 'wallet', type: 'address' }
-                ],
-                Mail: [
-                    { name: 'from', type: 'Person' },
-                    { name: 'to', type: 'Person' },
-                    { name: 'contents', type: 'string' }
                 ]
             };
 
             // The data to sign
+            const r = Math.floor(Math.random() * quotes.length);
+            const newRandomAddressFrom = ethers.Wallet.createRandom().address;
+            const newRandomAddressTo = ethers.Wallet.createRandom().address;
+            const receiver = quotes[r]
             const value = {
                 from: {
-                    name: 'You',
-                    wallet: account
+                    name: quote.split(" - ")[1],
+                    wallet: newRandomAddressFrom
                 },
                 to: {
-                    name: 'Bob',
-                    wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB'
+                    name: receiver.split(" - ")[1],
+                    wallet: newRandomAddressTo
                 },
-                contents: 'Hello, Bob!'
+                contents: quote.split(" - ")[0]
             };
 
             const signature = await signer.signTypedData(domain, types, value)
