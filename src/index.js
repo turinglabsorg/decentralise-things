@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { ethers } from "ethers";
+import { ethers, utils } from "ethers";
 
 let web3
 let account
@@ -73,6 +73,8 @@ async function sign() {
             const signature = await signer.signMessage(quote)
             document.getElementById('eth-signature').innerText = signature
             console.log("Signature is:", signature)
+            const verified = await ethers.verifyMessage(quote, signature);
+            console.log("Verified account is:", verified)
             // Pick new random quote
             const random = Math.floor(Math.random() * quotes.length);
             quote = quotes[random]
@@ -97,7 +99,7 @@ async function signTyped() {
                 chainId: 1,
                 verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC'
             };
-            
+
             // The named list of all type definitions
             const types = {
                 Person: [
@@ -110,7 +112,7 @@ async function signTyped() {
                     { name: 'contents', type: 'string' }
                 ]
             };
-            
+
             // The data to sign
             const value = {
                 from: {
@@ -123,8 +125,10 @@ async function signTyped() {
                 },
                 contents: 'Hello, Bob!'
             };
-            
+
             const signature = await signer.signTypedData(domain, types, value)
+            const verified = ethers.verifyTypedData(domain, types, value, signature);
+            console.log("Verified account is:", verified)
             document.getElementById('eth-signature').innerText = signature
             console.log("Signature is:", signature)
             // Pick new random quote
