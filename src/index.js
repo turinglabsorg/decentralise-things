@@ -1,9 +1,10 @@
 import _ from 'lodash';
-import Web3 from "web3";
+import { ethers } from "ethers";
 
 let web3
 let account
-let balance
+let signer = null;
+let provider;
 let isSigning = false
 let quote
 
@@ -36,10 +37,13 @@ const connectEl = document.getElementById('connect-button');
 connectEl.addEventListener("click", connect, false);
 const signEl = document.getElementById('sign-button');
 signEl.addEventListener("click", sign, false);
+const signTypedEl = document.getElementById('sign-typed-button');
+signTypedEl.addEventListener("click", signTyped, false);
 
 async function connect() {
     // Create new Web3 instance
-    web3 = await new Web3(window.ethereum);
+    provider = new ethers.BrowserProvider(window.ethereum)
+    signer = await provider.getSigner();
     // Ask accounts
     const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
@@ -49,20 +53,14 @@ async function connect() {
         // Pick first account
         account = accounts[0];
         document.getElementById('eth-address').innerText = account
-        // Get balance
-        balance = await web3.eth.getBalance(account);
-        // Format balance from Wei to Ether
-        balance = parseFloat(
-            web3.utils.fromWei(balance, "ether")
-        ).toFixed(10);
         console.log('Found account: ' + account)
-        console.log('Account balance: ' + balance)
         // Pick random quote
         const random = Math.floor(Math.random() * quotes.length);
         quote = quotes[random]
         document.getElementById('stranger-things-quote').innerText = quote
         connectEl.style.display = 'none'
         signEl.style.display = 'inline-block'
+        signTypedEl.style.display = 'inline-block'
     }
 }
 
@@ -72,7 +70,7 @@ async function sign() {
         try {
             document.getElementById('eth-signature').innerText = "SIGNING..."
             // Ask signature to wallet
-            const signature = await web3.eth.personal.sign(quote, account)
+            const signature = await signer.signMessage(quote)
             document.getElementById('eth-signature').innerText = signature
             console.log("Signature is:", signature)
             // Pick new random quote
@@ -82,8 +80,62 @@ async function sign() {
             isSigning = false
         } catch (e) {
             isSigning = false
-            document.getElementById('eth-button').innerText = "SIGN MESSAGE"
-            alert(e.message)
+            console.log(e.message)
+            alert("Can't sign message!")
+        }
+    }
+}
+
+async function signTyped() {
+    if (!isSigning) {
+        isSigning = true
+        try {
+            document.getElementById('eth-signature').innerText = "SIGNING..."
+            const domain = {
+                name: 'Ether Mail',
+                version: '1',
+                chainId: 1,
+                verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC'
+            };
+            
+            // The named list of all type definitions
+            const types = {
+                Person: [
+                    { name: 'name', type: 'string' },
+                    { name: 'wallet', type: 'address' }
+                ],
+                Mail: [
+                    { name: 'from', type: 'Person' },
+                    { name: 'to', type: 'Person' },
+                    { name: 'contents', type: 'string' }
+                ]
+            };
+            
+            // The data to sign
+            const value = {
+                from: {
+                    name: 'You',
+                    wallet: account
+                },
+                to: {
+                    name: 'Bob',
+                    wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB'
+                },
+                contents: 'Hello, Bob!'
+            };
+            
+            const signature = await signer.signTypedData(domain, types, value)
+            document.getElementById('eth-signature').innerText = signature
+            console.log("Signature is:", signature)
+            // Pick new random quote
+            const random = Math.floor(Math.random() * quotes.length);
+            quote = quotes[random]
+            document.getElementById('stranger-things-quote').innerText = quote
+            isSigning = false
+        } catch (e) {
+            isSigning = false
+            console.log(e.message)
+            alert("Can't sign message!")
         }
     }
 }
