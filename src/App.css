@@ -1,0 +1,93 @@
+body {
+  background-image: url(https://i.pinimg.com/originals/7e/46/a6/7e46a6df67a5a34a4fdaf57487c956fc.gif);
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+body, input, button {
+  font-family: 'VT323', monospace;
+  font-size: 40px;
+  color: #fff;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.app {
+  text-align: center;
+}
+
+.app h1 {
+  font-size: 120px;
+  margin-bottom: 0;
+}
+
+.content-area {
+  background: rgba(0, 0, 0, 0.2);
+  padding-top: 30px;
+  padding-bottom: 40px;
+}
+
+.wallet-address {
+  margin-bottom: 10px;
+}
+
+.quote-display {
+  margin-bottom: 40px;
+  font-size: 28px;
+  padding: 0 20px;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.buttons button {
+  color: #000;
+  padding: 5px 15px;
+}
+
+.signature-display {
+  font-size: 22px;
+  width: 200px;
+  word-break: break-all;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.chain-selector {
+  margin-bottom: 20px;
+}
+
+.chain-selector button {
+  font-size: 30px;
+  padding: 5px 20px;
+  margin: 0 5px;
+  border: 2px solid transparent;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  transition: all 0.2s;
+}
+
+.chain-selector button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.chain-selector button.active {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.error-message {
+  color: #ff6b6b;
+  font-size: 24px;
+  margin-top: 10px;
+}
