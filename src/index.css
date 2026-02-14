@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url(https://i.pinimg.com/originals/7e/46/a6/7e46a6df67a5a34a4fdaf57487c956fc.gif);
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  font-family: 'VT323', monospace;
+  font-size: 40px;
+  color: #fff;
+  text-align: center;
+}
+
+button {
+  font-family: 'VT323', monospace;
+  font-size: 40px;
+  color: #000;
+  cursor: pointer;
+  padding: 8px 24px;
+  border: none;
+  margin: 0 8px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

@@ -6,7 +6,7 @@
 
 ## WTF is this?
 
-A simple, ready-to-use Ethereum login with signature verification — powered by MetaMask and an unhealthy obsession with Stranger Things.
+A simple, ready-to-use Ethereum login with signature verification — powered by MetaMask, React, and an unhealthy obsession with Stranger Things.
 
 Connect your wallet. Get a random Stranger Things quote. Sign it. Verify it. Feel like a cryptographic Demogorgon slayer.
 
@@ -27,16 +27,16 @@ Because logging in with a password is the Upside Down of authentication. We live
 
 ```bash
 # Install dependencies (it's not the Upside Down, just node_modules)
-yarn install
+npm install
 
 # Start dev server
-yarn dev
+npm run dev
 
 # Build for production
-yarn build
+npm run build
 
-# Serve the docs
-yarn serve
+# Preview the production build
+npm run preview
 ```
 
 ## How It Works
@@ -50,9 +50,20 @@ yarn serve
 
 ## Tech Stack
 
+- **React** — Because components are the new Demogorgons
+- **Vite** — Faster than Eleven escaping Hawkins Lab
 - **ethers.js** — The Hawkins Lab of Ethereum libraries
-- **Webpack** — Bundles your code tighter than Steve's hair
-- **Lodash** — Because sometimes you need a utility belt, even in the Upside Down
+
+## Project Structure
+
+```
+src/
+  main.jsx       # Entry point
+  App.jsx        # Main App component
+  useWallet.js   # Custom hook for wallet connection & signing
+  quotes.js      # Stranger Things quotes collection
+  index.css      # Global styles with Stranger Things theming
+```
 
 ## Contributing
 
