@@ -1,0 +1,65 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url(https://i.pinimg.com/originals/7e/46/a6/7e46a6df67a5a34a4fdaf57487c956fc.gif);
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  font-family: 'VT323', monospace;
+  font-size: 40px;
+  color: #fff;
+  text-align: center;
+}
+
+button {
+  font-family: 'VT323', monospace;
+  font-size: 40px;
+  color: #000;
+  cursor: pointer;
+  padding: 8px 24px;
+  border: none;
+  margin: 4px;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+h1 {
+  font-size: 120px;
+  padding: 20px 0;
+  line-height: 1;
+}
+
+.content-box {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 30px 20px 40px;
+}
+
+.address {
+  margin-bottom: 16px;
+}
+
+.quote {
+  font-size: 28px;
+  margin-bottom: 40px;
+  padding: 0 20px;
+}
+
+.buttons {
+  margin-bottom: 16px;
+}
+
+.signature {
+  font-size: 22px;
+  width: 200px;
+  word-break: break-all;
+  display: inline-block;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
